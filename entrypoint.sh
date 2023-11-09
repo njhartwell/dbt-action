@@ -36,6 +36,7 @@ DBT_ACTION_LOG_FILE=${DBT_ACTION_LOG_FILE:="dbt_console_output.txt"}
 DBT_ACTION_LOG_PATH="${INPUT_DBT_PROJECT_FOLDER}/${DBT_ACTION_LOG_FILE}"
 echo "DBT_ACTION_LOG_PATH=${DBT_ACTION_LOG_PATH}" >> $GITHUB_ENV
 echo "saving console output in \"${DBT_ACTION_LOG_PATH}\""
+dbt deps | tee "${DBT_ACTION_LOG_FILE}"
 $1 2>&1 | tee "${DBT_ACTION_LOG_FILE}"
 if [ $? -eq 0 ]
   then
